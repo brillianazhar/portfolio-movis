@@ -4,6 +4,7 @@ import { useLoaderData } from "react-router-dom";
 import BannerDetailMovie from "src/Components/DetailMovie/BannerDetailMovie";
 import MoreDetailMovie from "src/Components/DetailMovie/MoreDetailMovie";
 import DetailMovieSkeleton from "src/Components/Skeleton/DetailMovieSkeleton";
+import { ErrorDetail } from "src/Utils/ErrorFetch";
 
 const Detail = () => {
   const { detail, video, credit, image } = useLoaderData();
@@ -11,7 +12,7 @@ const Detail = () => {
   return (
     <>
       <Suspense fallback={<DetailMovieSkeleton />}>
-        <Await resolve={detail}>
+        <Await resolve={detail} errorElement={<ErrorDetail />}>
           {(detail) => (
             <>
               <Await resolve={video}>

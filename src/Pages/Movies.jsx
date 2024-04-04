@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useLoaderData } from "react-router-dom";
 import MoviesIndex from "src/Components/Movies/MoviesIndex";
 import MoviesListSkeleton from "src/Components/Skeleton/MoviesListSkeleton";
+import { ErrorListMovies } from "src/Utils/ErrorFetch";
 
 const Movies = () => {
   const params = useParams();
@@ -18,7 +19,10 @@ const Movies = () => {
           </h1>
         }
       >
-        <Await resolve={moviesList.movies}>
+        <Await
+          resolve={moviesList.movies}
+          errorElement={<ErrorListMovies params={params} />}
+        >
           {(movies) => <MoviesIndex moviesList={movies} params={params} />}
         </Await>
       </Suspense>
